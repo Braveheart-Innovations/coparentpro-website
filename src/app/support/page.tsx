@@ -10,7 +10,7 @@ const CONTACT_FORM_URL =
 const FAQ = [
   {
     q: "How do I connect with my co-parent?",
-    a: "Go to the My Network tab, tap 'Add Connection', and enter your co-parent's email address. They'll receive an invitation to connect. Once they accept, you'll be able to message, share calendars, and more.",
+    a: "Go to the My Network tab, tap \u2018Add Connection\u2019, and search for your co-parent using their name or email. Send them a connection request from within the app. Once they accept, you\u2019ll be able to message, share calendars, and more.",
   },
   {
     q: "Is my data secure?",

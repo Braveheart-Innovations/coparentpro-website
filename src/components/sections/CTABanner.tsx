@@ -9,8 +9,8 @@ export default function CTABanner() {
             Ready to communicate better?
           </h2>
           <p className="mt-4 text-lg text-white/80">
-            Join thousands of co-parents who are building a healthier
-            co-parenting relationship. Start your free trial today.
+            Take the first step toward better communication for your
+            children{"\u2019"}s sake. Start your free trial today.
           </p>
           <div className="mt-8 flex justify-center">
             <AppStoreBadges direction="row" />

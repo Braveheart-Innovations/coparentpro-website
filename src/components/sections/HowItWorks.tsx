@@ -12,7 +12,7 @@ const STEPS = [
     number: "2",
     title: "Connect with your co-parent",
     description:
-      "Send a connection request via email. Once accepted, you'll share a secure communication channel.",
+      "Search for your co-parent securely within the app and send a connection request. Once accepted, you\u2019ll share a private communication channel.",
     color: "bg-secondary text-white",
   },
   {

@@ -59,7 +59,7 @@ const FEATURES = [
     ),
     title: "Privacy & Security",
     description:
-      "End-to-end encryption, Firebase security rules, and audit logging. Your family&apos;s data is protected at every level.",
+      "End-to-end encryption, Firebase security rules, and audit logging. Your family\u2019s data is protected at every level.",
   },
 ];
 
