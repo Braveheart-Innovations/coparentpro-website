@@ -140,10 +140,10 @@ export default function LicensesPage() {
               included in the application source code. If you would like a copy
               of any license, please contact us at{" "}
               <a
-                href="mailto:legal@braveheartinnovations.com"
+                href="mailto:support@braveheartinnovations.com"
                 className="text-primary hover:text-primary-dark underline"
               >
-                legal@braveheartinnovations.com
+                support@braveheartinnovations.com
               </a>
               .
             </p>

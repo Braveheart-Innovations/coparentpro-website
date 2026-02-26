@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui";
-import { PRIVACY_EMAIL } from "@/lib/metadata";
+import { SUPPORT_EMAIL } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -256,10 +256,10 @@ export default function PrivacyPage() {
             <br />
             Email:{" "}
             <a
-              href={`mailto:${PRIVACY_EMAIL}`}
+              href={`mailto:${SUPPORT_EMAIL}`}
               className="text-primary hover:text-primary-dark underline"
             >
-              {PRIVACY_EMAIL}
+              {SUPPORT_EMAIL}
             </a>
           </p>
         </article>

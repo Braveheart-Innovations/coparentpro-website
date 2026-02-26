@@ -4,8 +4,6 @@ export const SITE_DESCRIPTION =
   "Communicate better, co-parent smarter. AI-powered communication analysis, shared calendars, and court-compliant messaging for co-parents.";
 export const COMPANY_NAME = "Braveheart Innovations";
 export const SUPPORT_EMAIL = "support@braveheartinnovations.com";
-export const PRIVACY_EMAIL = "privacy@braveheartinnovations.com";
-export const LEGAL_EMAIL = "legal@braveheartinnovations.com";
 
 export const APP_STORE_URL = "#"; // TODO: Replace with actual App Store URL once published
 export const PLAY_STORE_URL = "#"; // TODO: Replace with actual Play Store URL once published
