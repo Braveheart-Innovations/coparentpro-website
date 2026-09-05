@@ -21,6 +21,7 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { label: "Help Center", href: "/support" },
       { label: "FAQ", href: "/support#faq" },
+      { label: "Delete your account", href: "/delete-account" },
       { label: "Contact", href: `mailto:${SUPPORT_EMAIL}` },
     ],
   },
