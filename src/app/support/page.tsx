@@ -38,7 +38,11 @@ const FAQ: FAQItem[] = [
   },
   {
     q: "What happens to my data if I delete my account?",
-    a: "When you request account deletion, there’s a 30-day grace period during which you can cancel. After that, your personal data is permanently removed. Message content is anonymized — your identity is removed — but kept so your co-parent’s records stay complete.",
+    a: "In the app, go to Settings > Account > Account & Security > Delete My Account. There’s a 30-day grace period during which you can sign back in and choose Restore my account. After that, your personal data is permanently removed. Message content is anonymized — your identity is removed — but kept so your co-parent’s records stay complete. If you no longer have the app, email us and we’ll handle it; the Delete your account page explains every step.",
+  },
+  {
+    q: "How do I report a message or an AI suggestion?",
+    a: "Long-press any message from the other person and choose Report message, then pick a reason. On the review sheet, each Softer and More direct rewrite has a Report this suggestion link. Reports go straight to our support team, and we review them within 24 hours. You can also pause or disconnect a connection from the People tab at any time.",
   },
   {
     q: "Can I get a copy of my data?",
@@ -77,6 +81,13 @@ export default function SupportPage() {
               Read How it works
             </Link>
             .
+          </p>
+          <p className="mt-3 text-center text-sm leading-[1.65] text-neutral-500">
+            Leaving?{" "}
+            <Link href="/delete-account" className="font-semibold text-primary hover:text-primary-dark">
+              How to delete your account
+            </Link>
+            , in the app or by email.
           </p>
         </Container>
       </section>
