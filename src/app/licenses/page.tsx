@@ -90,10 +90,10 @@ const LICENSES = [
 
 export default function LicensesPage() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section className="bg-paper py-16 sm:py-20">
       <Container>
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4">
+          <h1 className="font-serif text-[36px] font-medium leading-[1.1] tracking-[-0.015em] text-neutral-900 sm:text-[44px] mb-4">
             Open Source Licenses
           </h1>
           <p className="text-neutral-700 leading-relaxed mb-10">
@@ -107,7 +107,7 @@ export default function LicensesPage() {
             {LICENSES.map((lib) => (
               <div
                 key={lib.name}
-                className="flex items-start justify-between gap-4 py-4 border-b border-neutral-100 last:border-0"
+                className="flex items-start justify-between gap-4 py-4 border-b border-line last:border-0"
               >
                 <div>
                   <h2 className="font-semibold text-neutral-900">
@@ -124,14 +124,14 @@ export default function LicensesPage() {
                     {lib.copyright}
                   </p>
                 </div>
-                <span className="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 flex-shrink-0">
+                <span className="inline-flex shrink-0 items-center rounded-full bg-primary-light px-3 py-1 text-xs font-semibold text-primary">
                   {lib.license}
                 </span>
               </div>
             ))}
           </div>
 
-          <div className="mt-12 p-6 bg-neutral-100 rounded-xl">
+          <div className="mt-12 rounded-2xl border border-line bg-mist p-6">
             <h2 className="font-semibold text-neutral-900 mb-2">
               Full License Texts
             </h2>

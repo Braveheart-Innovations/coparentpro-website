@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section className="bg-paper py-16 sm:py-20">
       <Container>
         <article className="max-w-3xl mx-auto prose-neutral">
-          <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-2">
+          <h1 className="font-serif text-[36px] font-medium leading-[1.1] tracking-[-0.015em] text-neutral-900 sm:text-[44px] mb-2">
             Terms of Service
           </h1>
           <p className="text-sm text-neutral-500 mb-10">
@@ -25,7 +25,7 @@ export default function TermsPage() {
             Terms of Service (&ldquo;Terms&rdquo;). Please read them carefully.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             1. Acceptance of Terms
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -34,7 +34,7 @@ export default function TermsPage() {
             not use the App.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             2. Eligibility
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -43,7 +43,7 @@ export default function TermsPage() {
             legal authority to enter into these Terms.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             3. Account Responsibilities
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -65,7 +65,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             4. Acceptable Use
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-2">
@@ -106,7 +106,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             5. Communication Analysis
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -130,7 +130,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             6. Content Ownership
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -149,7 +149,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             7. Court Reports and Data Exports
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -172,7 +172,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             8. Subscription and Payments
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -195,7 +195,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             9. Data Deletion
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -218,7 +218,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             10. Limitation of Liability
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -246,7 +246,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             11. Indemnification
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -255,7 +255,7 @@ export default function TermsPage() {
             violation of these Terms.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             12. Termination
           </h2>
           <ul className="list-none text-neutral-700 mb-6 space-y-2">
@@ -273,7 +273,7 @@ export default function TermsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             13. Governing Law
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -282,7 +282,7 @@ export default function TermsPage() {
             principles.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             14. Changes to Terms
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -291,7 +291,7 @@ export default function TermsPage() {
             constitutes acceptance.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             15. Contact
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-4">

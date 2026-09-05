@@ -1,43 +1,46 @@
+import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
-type Variant = "primary" | "secondary" | "ghost";
-type Size = "sm" | "md" | "lg";
+type Variant = "primary" | "teal" | "outline" | "outline-light";
+type Size = "sm" | "md";
 
-const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-primary text-white hover:bg-primary-dark active:bg-primary-dark border-2 border-transparent",
-  secondary:
-    "border-2 border-primary text-primary hover:bg-primary-light active:bg-primary-light bg-transparent",
-  ghost:
-    "text-primary hover:bg-primary-light active:bg-primary-light bg-transparent border-2 border-transparent",
+const VARIANT_CLASSES: Record<Variant, string> = {
+  primary: "bg-primary text-white hover:bg-primary-dark",
+  teal: "bg-secondary text-white hover:bg-secondary-dark",
+  outline:
+    "border-[1.5px] border-primary text-primary hover:bg-primary-light bg-transparent",
+  "outline-light":
+    "border-[1.5px] border-white/35 text-white hover:bg-white/10 bg-transparent",
 };
 
-const sizeClasses: Record<Size, string> = {
-  sm: "px-4 py-2 text-sm font-medium",
-  md: "px-6 py-3 text-base font-medium",
-  lg: "px-8 py-4 text-lg font-semibold",
+const SIZE_CLASSES: Record<Size, string> = {
+  sm: "px-5 py-2.5 text-sm rounded-[10px]",
+  md: "px-7 py-3.5 text-[15px] rounded-xl",
 };
 
-const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+const BASE_CLASSES =
+  "inline-flex items-center justify-center gap-2 font-semibold whitespace-nowrap transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed";
 
-type LinkProps = {
+type CommonProps = {
+  variant?: Variant;
+  size?: Size;
+  className?: string;
+  children: React.ReactNode;
+};
+
+type LinkProps = CommonProps & {
   href: string;
-  variant?: Variant;
-  size?: Size;
-  className?: string;
-  children: React.ReactNode;
-} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">;
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className">;
 
-type ButtonProps = {
+type NativeButtonProps = CommonProps & {
   href?: undefined;
-  variant?: Variant;
-  size?: Size;
-  className?: string;
-  children: React.ReactNode;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className">;
 
-type Props = LinkProps | ButtonProps;
+type Props = LinkProps | NativeButtonProps;
+
+function isInternal(href: string) {
+  return href.startsWith("/");
+}
 
 export default function Button({
   variant = "primary",
@@ -46,12 +49,19 @@ export default function Button({
   children,
   ...rest
 }: Props) {
-  const classes = [baseClasses, variantClasses[variant], sizeClasses[size], className]
+  const classes = [BASE_CLASSES, VARIANT_CLASSES[variant], SIZE_CLASSES[size], className]
     .filter(Boolean)
     .join(" ");
 
   if ("href" in rest && rest.href !== undefined) {
     const { href, ...anchorRest } = rest as LinkProps;
+    if (isInternal(href)) {
+      return (
+        <Link href={href} className={classes} {...anchorRest}>
+          {children}
+        </Link>
+      );
+    }
     return (
       <a href={href} className={classes} {...anchorRest}>
         {children}
@@ -59,9 +69,9 @@ export default function Button({
     );
   }
 
-  const buttonRest = rest as ButtonHTMLAttributes<HTMLButtonElement>;
+  const { type = "button", ...buttonRest } = rest as NativeButtonProps;
   return (
-    <button className={classes} {...buttonRest}>
+    <button type={type} className={classes} {...buttonRest}>
       {children}
     </button>
   );

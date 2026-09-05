@@ -1,208 +1,332 @@
 import type { Metadata } from "next";
-import { Container, Card, Button } from "@/components/ui";
+import Link from "next/link";
+import { Container, Eyebrow } from "@/components/ui";
+import type { Accent } from "@/components/ui";
+import {
+  DarkCTA,
+  FeatureSplit,
+  PageHero,
+  SecurityIllustration,
+} from "@/components/sections";
+import type { FeatureSplitProps } from "@/components/sections";
+import { PRICING } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Features",
   description:
-    "Explore CoParentPro's features: AI communication analysis, shared calendars, court-compliant messaging, expense tracking, and more.",
+    "Tone guidance before you hit send, a shared custody calendar, expense splitting, court-ready records, and a shared files library — built for real families.",
 };
 
-const FEATURE_SECTIONS = [
+type Section = Pick<
+  FeatureSplitProps,
+  "eyebrow" | "accent" | "title" | "description" | "details" | "shot"
+>;
+
+const LEAD: Section = {
+  eyebrow: "Communication",
+  accent: "primary",
+  title: "A second opinion before you hit send",
+  description:
+    "As you type, a rule-based check on your phone rates your draft green, yellow, or red — no connection needed. When you tap Review or Send, our cloud AI reads the draft in context, explains each flagged phrase in plain language, and offers two rewrites: Softer and More direct. You choose what to send.",
+  details: [
+    "Live green / yellow / red feedback as you type, on your phone",
+    "Cloud AI review on Send and Review: every flagged phrase explained",
+    "Two rewrites for a flagged draft — Softer and More direct — one tap to use either",
+    "Hold until morning: park a heated draft and get a reminder at 8 AM",
+    "Explicit threats and insults are always caught on your phone — offline, in Private Mode, on any plan",
+  ],
+  shot: { src: "/images/shots/02-review-sheet-dark.webp", alt: "The message review sheet" },
+};
+
+const SECTIONS: Section[] = [
   {
-    badge: "Communication",
-    title: "AI-Powered Communication Analysis",
+    eyebrow: "Scheduling",
+    accent: "secondary",
+    title: "Shared custody calendar",
     description:
-      "Our on-device NLP engine analyzes your messages in real-time, providing color-coded feedback before you send. Green means constructive, yellow suggests caution, and red flags potentially harmful language.",
+      "One calendar both parents can trust. Set the custody pattern once, add the things that happen around it, and ask for a change in the app instead of arguing about it over text — with a record either of you can point to later.",
     details: [
-      "Real-time tone analysis as you type",
-      "Color-coded indicators (green, yellow, red)",
-      "Suggestions for rephrasing when needed",
-      "On-device processing — your messages stay private",
-      "Tracks communication patterns over time",
+      "Custody pattern with parent color coding, plus handoff times and places",
+      "Recurring events for school, medical, activities, holidays, and birthdays",
+      "Schedule-change requests: propose, counter, or accept — the outcome lands in the thread",
+      "Conflict warnings when a child or parent is double-booked, or an event lands on the other parent’s day",
+      "Reminders before handoffs and events, and sync to your phone’s calendar",
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
-      </svg>
-    ),
+    shot: { src: "/images/shots/03-calendar-light.webp", alt: "Shared custody calendar" },
   },
   {
-    badge: "Scheduling",
-    title: "Shared Custody Calendar",
+    eyebrow: "Messaging",
+    accent: "primary",
+    title: "Messaging with a record you can verify",
     description:
-      "A unified calendar that both parents can access. Create custody schedules, track handoffs, manage activities, and keep everyone on the same page — no more miscommunication about who has the kids.",
+      "Every message is timestamped, stored securely, and locked the moment it is sent. Delivery and read status keep both parents accountable, and when you need a record, you can export one with integrity verification built in.",
     details: [
-      "Visual custody schedule with parent color coding",
-      "Recurring events for regular custody patterns",
-      "Activity tracking (school, sports, medical)",
-      "Handoff time and location management",
-      "Calendar sharing between co-parents",
+      "Messages can’t be edited or deleted once sent — by either parent",
+      "Timestamps, delivery status, and read receipts on every message",
+      "Separate threads by topic, so school and medical conversations stay findable",
+      "Photos in messages on every plan; document attachments with Premium",
+      "Court-ready PDF export with a SHA-256 hash and verification code (Premium)",
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-      </svg>
-    ),
+    shot: { src: "/images/shots/01-messages-light.webp", alt: "Messaging with tone guidance" },
   },
   {
-    badge: "Messaging",
-    title: "Secure, Court-Compliant Messaging",
+    eyebrow: "Finance",
+    accent: "tertiary",
+    title: "Expense tracking & splitting",
     description:
-      "Every message is timestamped, stored securely, and available for export with integrity verification. Read receipts and delivery confirmations ensure accountability.",
+      "Keep a clear record of child-related costs. Whoever paid logs it, the split is applied, and the other parent pays, approves, proposes a change, or disputes — in the app, with a reason attached. Nothing is silently edited.",
     details: [
-      "End-to-end message storage with timestamps",
-      "Read receipts and delivery status",
-      "SHA-256 integrity verification for exports",
-      "Professional report formatting for legal use",
-      "Unlimited message history",
+      "Log costs with a category and receipt photos",
+      "Split 50/50 or by an agreed ratio; see who owes whom at a glance",
+      "Propose a change or decline with a reason — every step is kept",
+      "A printable record for each expense: every payment, change, and reason",
+      "Either parent can pay, approve, or dispute — even if Premium lapses",
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
-      </svg>
-    ),
+    shot: { src: "/images/shots/05-expenses-light.webp", alt: "Expense tracking and splitting" },
   },
   {
-    badge: "Finance",
-    title: "Expense Tracking & Splitting",
+    eyebrow: "Insights",
+    accent: "secondary",
+    title: "See your communication improve",
     description:
-      "Keep a clear record of child-related expenses. Log costs, attach receipts, request reimbursements, and maintain a transparent financial history that both parents can review.",
+      "Premium insights show how your own messages trend over time — so you can see the temperature drop, not just feel it. Patterns, not blame. Nothing here is computed from your co-parent’s messages, and nothing here is shown to them.",
     details: [
-      "Log and categorize child-related expenses",
-      "Request and track reimbursements",
-      "Attach photos of receipts",
-      "Shared expense history",
-      "Export financial summaries",
+      "How often your messages get flagged, and whether that is improving",
+      "Which patterns come up, with examples from your own messages",
+      "What you did with flagged drafts: revised, used a rewrite, or sent anyway",
+      "Time-of-day peaks and streaks of calm days",
+      "Built only from your own messages — never shared with your co-parent",
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-      </svg>
-    ),
+    shot: { src: "/images/shots/07-insights-light.webp", alt: "Communication insights" },
   },
   {
-    badge: "Information",
-    title: "Child Information Sharing",
+    eyebrow: "Documents",
+    accent: "primary",
+    title: "A shared files library",
     description:
-      "Store and share important child details — medical contacts, school information, emergency contacts, and more. Both parents always have access to critical information.",
+      "Court orders, school forms, medical records, insurance cards — stored once, visible to both parents, always findable when you need them.",
     details: [
-      "Medical provider contacts and records",
-      "School and activity information",
-      "Emergency contact lists",
-      "Medication and allergy tracking",
-      "Secure sharing between co-parents",
+      "One library both parents can read",
+      "Organized by category: Medical, School, Legal, Financial, Activities, and more",
+      "Photos and documents in one place; expense records are saved here automatically",
+      "Existing files stay readable and downloadable even if Premium lapses",
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-      </svg>
-    ),
+    shot: { src: "/images/shots/06-files-dark.webp", alt: "Shared files library" },
   },
   {
-    badge: "Security",
-    title: "Enterprise-Grade Security",
+    eyebrow: "Security",
+    accent: "tertiary",
+    title: "Security you can check, not just trust",
     description:
-      "Your family's data is protected with the same security standards used by major institutions. Firebase Authentication, Firestore security rules, and comprehensive audit logging.",
+      "Your family’s data lives on Google Cloud (Firebase) behind server-enforced access rules, and the record-keeping guarantees that matter in a custody dispute are built into the database itself.",
     details: [
-      "TLS/SSL encryption in transit and at rest",
-      "Firebase Authentication with secure tokens",
-      "Role-based access controls",
-      "Comprehensive audit logging",
-      "GDPR-compliant data handling",
+      "Encrypted in transit and at rest",
+      "Server-enforced access rules: only your family can read your family’s records",
+      "Messages are immutable after sending, with write-once audit logs behind exports and record changes",
+      "Verified email before anyone can find or connect with you; optional two-factor sign-in",
+      "Delete your account any time, with a 30-day grace period to change your mind",
     ],
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-      </svg>
-    ),
   },
 ];
 
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-    </svg>
-  );
-}
+type Layer = {
+  accent: Accent;
+  tag: string;
+  title: string;
+  icon: string;
+  body: string;
+  foot: string;
+};
+
+const LAYERS: Layer[] = [
+  {
+    accent: "secondary",
+    tag: "Always on · every plan",
+    title: "On your phone",
+    icon: "M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3",
+    body: "A rule-based tone check runs as you type and again when you send. It rates the draft green, yellow, or red and catches explicit insults, threats, and pressure tactics.",
+    foot: "Needs no connection. This layer is what free accounts and Private Mode rely on.",
+  },
+  {
+    accent: "primary",
+    tag: "Send & Review · Premium",
+    title: "In the cloud",
+    icon: "M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z",
+    body: "When you tap Review or Send, the draft goes to CoParentPro’s cloud AI to be read in context. It explains flagged phrases and writes two rewrites: Softer and More direct.",
+    foot: "Only the draft is sent — plus the message it replies to, for context. Rewrites are never stored. Local warnings take precedence: the cloud can’t talk a red down to green.",
+  },
+  {
+    accent: "tertiary",
+    tag: "Your choice · Settings",
+    title: "Private Mode",
+    icon: "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z",
+    body: "One switch keeps subtle tone analysis on your phone only. Nothing goes to the cloud, so there are no cloud explanations or rewrites while it is on — strong explicit warnings still appear.",
+    foot: "Threads with family members and other non-co-parent contacts always stay on your phone, whatever the setting.",
+  },
+];
+
+const LAYER_STYLES: Record<Accent, { top: string; chip: string }> = {
+  primary: { top: "border-t-primary", chip: "bg-primary-light text-primary" },
+  secondary: { top: "border-t-secondary", chip: "bg-secondary-light text-secondary" },
+  tertiary: { top: "border-t-tertiary", chip: "bg-tertiary-light text-tertiary" },
+  glow: { top: "border-t-teal-glow", chip: "bg-secondary-light text-secondary" },
+  muted: { top: "border-t-neutral-300", chip: "bg-neutral-100 text-neutral-700" },
+};
+
+const EXTRAS = [
+  {
+    title: "Family members",
+    body: "Invite grandparents or relatives to read the calendar and child details. They never see expenses or files, and they only message the parent who invited them unless the other parent says yes.",
+  },
+  {
+    title: "Shared contacts & child details",
+    body: "Doctors, teachers, coaches, allergies, school info — entered once, visible to both parents.",
+  },
+  {
+    title: "Phone calendar sync",
+    body: "Push custody days and events to the calendar already on your iPhone or Android phone.",
+  },
+  {
+    title: "Two-factor sign-in",
+    body: "Optional, with any authenticator app. No SMS codes — on purpose, because a former partner may still share your phone plan.",
+  },
+  {
+    title: "Notifications & reminders",
+    body: "Message, calendar, and expense alerts, plus reminders ahead of handoffs and events.",
+  },
+  {
+    title: "Light, dark, and tablet",
+    body: "Follows your system theme and runs on iPhone, iPad, and Android phones and tablets.",
+  },
+] as const;
 
 export default function FeaturesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-primary-light to-white py-16 sm:py-20">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 tracking-tight">
-              Features built for real families
-            </h1>
-            <p className="mt-4 text-lg sm:text-xl text-neutral-700 leading-relaxed">
-              Every feature in CoParentPro was designed with one goal: helping
-              you co-parent effectively while keeping your children first.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Features"
+        title="Built for real families, not just courtrooms"
+        description="Every feature in CoParentPro was designed with one goal: helping you co-parent calmly while keeping your children first. Here’s what’s in the app — and exactly where your words go."
+      />
 
-      {/* Feature sections */}
-      {FEATURE_SECTIONS.map((section, index) => (
-        <section
-          key={section.title}
-          className={`py-16 sm:py-20 ${index % 2 === 0 ? "bg-white" : "bg-neutral-100"}`}
-        >
-          <Container>
-            <div className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
-              <div className={index % 2 !== 0 ? "lg:order-2" : ""}>
-                <span className="inline-block text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-                  {section.badge}
-                </span>
-                <h2 className="text-3xl font-bold text-neutral-900 tracking-tight mb-4">
-                  {section.title}
-                </h2>
-                <p className="text-neutral-700 leading-relaxed mb-6">
-                  {section.description}
-                </p>
-                <ul className="space-y-3">
-                  {section.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3 text-neutral-700">
-                      <CheckIcon />
-                      <span>{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      <FeatureSplit {...LEAD} />
 
-              {/* Placeholder illustration */}
-              <div className={index % 2 !== 0 ? "lg:order-1" : ""}>
-                <Card interactive={false} className="aspect-[4/3] flex items-center justify-center bg-gradient-to-br from-primary-light to-secondary-light">
-                  <div className="text-primary opacity-40">
-                    {section.icon}
-                  </div>
-                </Card>
-              </div>
-            </div>
-          </Container>
-        </section>
-      ))}
-
-      {/* CTA */}
-      <section className="py-16 sm:py-20 bg-primary">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Experience all features free for 7 days
+      {/* Where your words go */}
+      <section className="border-y border-line bg-mist py-16 sm:py-20">
+        <Container size="lg">
+          <div className="mx-auto mb-11 max-w-[640px] text-center">
+            <Eyebrow>Where your words go</Eyebrow>
+            <h2 className="font-serif text-[30px] font-medium leading-[1.15] sm:text-[36px]">
+              Two layers of analysis. One switch that keeps it on your phone.
             </h2>
-            <p className="mt-4 text-lg text-white/80">
-              No credit card required. Cancel anytime.
+            <p className="mt-4 text-base leading-[1.65] text-neutral-700">
+              Tone guidance in CoParentPro is not one thing. Part of it runs
+              entirely on your phone, part of it runs on our cloud AI, and you
+              decide whether the cloud is ever involved.
             </p>
-            <div className="mt-8">
-              <Button href="/pricing" variant="secondary" size="lg" className="bg-white text-primary hover:bg-neutral-100 border-white">
-                View Pricing
-              </Button>
-            </div>
+          </div>
+          <div className="grid items-stretch gap-5 md:grid-cols-3">
+            {LAYERS.map((layer) => {
+              const styles = LAYER_STYLES[layer.accent];
+              return (
+                <div
+                  key={layer.title}
+                  className={`flex flex-col rounded-[18px] border border-line border-t-4 bg-white px-[26px] pt-7 pb-7 ${styles.top}`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px] ${styles.chip}`}>
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        className="h-[21px] w-[21px]"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d={layer.icon} />
+                      </svg>
+                    </div>
+                    <span
+                      className={`rounded-full px-2.5 py-[5px] text-right text-[11px] font-bold uppercase tracking-[0.06em] ${styles.chip}`}
+                    >
+                      {layer.tag}
+                    </span>
+                  </div>
+                  <h3 className="mt-[18px] text-[19px] font-bold">{layer.title}</h3>
+                  <p className="mt-2.5 flex-1 text-[14.5px] leading-[1.65] text-neutral-700">
+                    {layer.body}
+                  </p>
+                  <p className="mt-4 border-t border-line pt-3.5 text-[13px] leading-[1.55] text-neutral-500">
+                    {layer.foot}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mx-auto mt-7 max-w-[760px] text-center text-[13.5px] leading-[1.65] text-neutral-500">
+            Free accounts get the on-phone check, a daily allowance of cloud
+            reviews, and three full previews when the cloud catches something the
+            rules missed. Premium unlocks explanations and rewrites on every
+            flagged draft. Drafts and rewrites are never stored and never shown to
+            your co-parent.
+          </p>
+          <p className="mx-auto mt-4.5 max-w-[760px] text-center text-[14.5px] leading-[1.65] text-neutral-700">
+            That’s the short version.{" "}
+            <Link href="/how-it-works" className="font-semibold text-primary hover:text-primary-dark">
+              How it works
+            </Link>{" "}
+            explains why it’s built this way, what it does in the moments that
+            matter, and what other apps say about their own tone checks.
+          </p>
+        </Container>
+      </section>
+
+      {SECTIONS.map((section, index) => {
+        // Alternate background and image side, starting with the image on the left.
+        const odd = index % 2 === 0;
+        return (
+          <FeatureSplit
+            key={section.title}
+            {...section}
+            bg={odd ? "paper" : "mist"}
+            reverse={odd}
+            visual={section.shot ? undefined : <SecurityIllustration />}
+          />
+        );
+      })}
+
+      {/* Also included */}
+      <section className="bg-paper py-16 sm:py-20">
+        <Container size="lg">
+          <div className="mx-auto mb-10 max-w-[600px] text-center">
+            <Eyebrow>Also included</Eyebrow>
+            <h2 className="font-serif text-[30px] font-medium leading-[1.2] sm:text-[34px]">
+              The rest of the household
+            </h2>
+          </div>
+          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+            {EXTRAS.map((extra) => (
+              <div key={extra.title} className="rounded-2xl border border-line bg-white px-[22px] pt-[22px] pb-6">
+                <p className="text-[15px] font-bold">{extra.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-700">{extra.body}</p>
+              </div>
+            ))}
           </div>
         </Container>
       </section>
+
+      <DarkCTA
+        title="Start free. Upgrade when you want more."
+        body={
+          <>
+            Messaging and on-phone tone guidance are free for both parents.
+            Premium comes with a {PRICING.trialDays}-day trial once you’re
+            connected to your co-parent — cancel anytime through the App Store or
+            Google Play.
+          </>
+        }
+        secondary={{ href: "/pricing", label: "View pricing" }}
+      />
     </>
   );
 }

@@ -1,75 +1,92 @@
 @import "tailwindcss";
 
-:root {
-  /* Primary - Calming Blue */
-  --color-primary: #4A6FA5;
-  --color-primary-light: #E8EEF7;
-  --color-primary-dark: #2C4B80;
+@theme {
+  /* Typography — Newsreader for display, Public Sans for everything else */
+  --font-sans:
+    var(--font-public-sans), "Public Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif:
+    var(--font-newsreader), "Newsreader", Georgia, "Times New Roman", serif;
 
-  /* Secondary - Teal */
-  --color-secondary: #449B9B;
-  --color-secondary-light: #E5F3F3;
-  --color-secondary-dark: #2A7575;
+  /* Primary — calming blue (from mobile app src/theme/colors.ts) */
+  --color-primary: #4a6fa5;
+  --color-primary-light: #e8eef7;
+  --color-primary-dark: #2c4b80;
 
-  /* Tertiary - Lavender */
-  --color-tertiary: #8A7FB9;
-  --color-tertiary-light: #F0EEF7;
-  --color-tertiary-dark: #5E5286;
+  /* Secondary — teal */
+  --color-secondary: #449b9b;
+  --color-secondary-light: #e5f3f3;
+  --color-secondary-dark: #2a7575;
+
+  /* Tertiary — lavender */
+  --color-tertiary: #8a7fb9;
+  --color-tertiary-light: #eeebf6;
+  --color-tertiary-dark: #5e5286;
+
+  /* Navy — dark sections, header wordmark, footer */
+  --color-navy: #1a2a47;
+  --color-navy-deep: #12203a;
+  --color-teal-glow: #7fc9c9;
+
+  /* Surfaces & lines */
+  --color-paper: #fdfdfc;
+  --color-mist: #f5f7fa;
+  --color-cloud: #f0f2f5;
+  --color-line: #ececea;
+  --color-line-blue: #d6dfec;
+  --color-line-teal: #b8dede;
+  --color-line-lavender: #ddd7ee;
 
   /* Neutrals */
-  --color-neutral-900: #1D1D1F;
+  --color-neutral-900: #1d1d1f;
   --color-neutral-700: #555559;
-  --color-neutral-500: #8E8E93;
-  --color-neutral-300: #D1D1D6;
-  --color-neutral-100: #F5F5F5;
+  --color-neutral-500: #8e8e93;
+  --color-neutral-300: #d1d1d6;
+  --color-neutral-100: #f5f5f5;
 
   /* Feedback */
-  --color-success: #4CAF50;
-  --color-warning: #FFC107;
-  --color-error: #F44336;
+  --color-success: #4caf50;
+  --color-warning: #ffc107;
+  --color-error: #f44336;
+
+  /* Tone-guidance illustration colors */
+  --color-flag-red: #b23b36;
+  --color-flag-red-light: #fdecec;
+  --color-amber: #e0a100;
+  --color-amber-light: #fff9e8;
+  --color-amber-mark: #fff3cd;
+
+  /* Shadows */
+  --shadow-phone: 0 30px 60px -20px rgba(26, 42, 71, 0.35);
+  --shadow-phone-lg: 0 40px 80px -24px rgba(26, 42, 71, 0.45);
+  --shadow-card: 0 30px 60px -30px rgba(26, 42, 71, 0.35);
+  --shadow-plan: 0 28px 56px -28px rgba(74, 111, 165, 0.4);
 }
 
-@theme inline {
-  --color-primary: var(--color-primary);
-  --color-primary-light: var(--color-primary-light);
-  --color-primary-dark: var(--color-primary-dark);
-
-  --color-secondary: var(--color-secondary);
-  --color-secondary-light: var(--color-secondary-light);
-  --color-secondary-dark: var(--color-secondary-dark);
-
-  --color-tertiary: var(--color-tertiary);
-  --color-tertiary-light: var(--color-tertiary-light);
-  --color-tertiary-dark: var(--color-tertiary-dark);
-
-  --color-neutral-900: var(--color-neutral-900);
-  --color-neutral-700: var(--color-neutral-700);
-  --color-neutral-500: var(--color-neutral-500);
-  --color-neutral-300: var(--color-neutral-300);
-  --color-neutral-100: var(--color-neutral-100);
-
-  --color-success: var(--color-success);
-  --color-warning: var(--color-warning);
-  --color-error: var(--color-error);
-
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  background: var(--color-paper);
   color: var(--color-neutral-900);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-neutral-500);
 }
 
-/* Focus visible styles */
 *:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

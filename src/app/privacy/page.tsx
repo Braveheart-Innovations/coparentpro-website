@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section className="bg-paper py-16 sm:py-20">
       <Container>
         <article className="max-w-3xl mx-auto prose-neutral">
-          <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-2">
+          <h1 className="font-serif text-[36px] font-medium leading-[1.1] tracking-[-0.015em] text-neutral-900 sm:text-[44px] mb-2">
             Privacy Policy
           </h1>
           <p className="text-sm text-neutral-500 mb-10">
@@ -28,11 +28,11 @@ export default function PrivacyPage() {
             App.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             1. Information We Collect
           </h2>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.1 Account Information
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
             receive your name, email, and profile photo from those providers.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.2 Profile Information
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
             birth, phone number, gender, and a profile photo.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.3 Communication Data
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
             status, and read receipts are recorded.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.4 Communication Analysis
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
             to monitor or judge users.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.5 Calendar and Scheduling Data
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -77,7 +77,7 @@ export default function PrivacyPage() {
             information you enter are stored to provide scheduling services.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.6 Financial Data
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
             between co-parents.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.7 Child Information
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
             level of protection.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             1.8 Device and Usage Data
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
             analytics, and error reports to improve our services.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             2. How We Use Your Information
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-2">
@@ -125,11 +125,11 @@ export default function PrivacyPage() {
             <li>Comply with legal obligations</li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             3. Data Sharing and Disclosure
           </h2>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             3.1 Co-Parent Sharing
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -138,7 +138,7 @@ export default function PrivacyPage() {
             and expense records.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             3.2 Court Compliance
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -147,7 +147,7 @@ export default function PrivacyPage() {
             share data with courts; exports are initiated by you.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             3.3 Service Providers
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -156,7 +156,7 @@ export default function PrivacyPage() {
             with Google&apos;s data processing terms.
           </p>
 
-          <h3 className="text-xl font-semibold text-neutral-900 mt-6 mb-2">
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
             3.4 Legal Requirements
           </h3>
           <p className="text-neutral-700 leading-relaxed mb-4">
@@ -164,7 +164,7 @@ export default function PrivacyPage() {
             order.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             4. Children&apos;s Privacy (COPPA)
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -176,7 +176,7 @@ export default function PrivacyPage() {
             please contact us immediately.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             5. Data Security
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-2">
@@ -192,7 +192,7 @@ export default function PrivacyPage() {
             <li>Audit logging for court-sensitive operations</li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             6. Data Retention
           </h2>
           <ul className="list-disc list-inside text-neutral-700 mb-6 space-y-1">
@@ -211,7 +211,7 @@ export default function PrivacyPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             7. Your Rights
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-2">
@@ -234,7 +234,7 @@ export default function PrivacyPage() {
             complaint with a supervisory authority.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             8. Changes to This Policy
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-6">
@@ -244,7 +244,7 @@ export default function PrivacyPage() {
             policy.
           </p>
 
-          <h2 className="text-2xl font-semibold text-neutral-900 mt-10 mb-4">
+          <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             9. Contact Us
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-4">

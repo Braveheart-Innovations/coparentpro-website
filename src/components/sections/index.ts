@@ -1,6 +1,10 @@
-export { default as Hero } from "./Hero";
-export { default as FeatureGrid } from "./FeatureGrid";
-export { default as HowItWorks } from "./HowItWorks";
-export { default as TrustSignals } from "./TrustSignals";
-export { default as PricingCards } from "./PricingCards";
-export { default as CTABanner } from "./CTABanner";
+export { default as ContactForm } from "./ContactForm";
+export { default as DarkCTA } from "./DarkCTA";
+export { default as FAQAccordion } from "./FAQAccordion";
+export type { FAQItem } from "./FAQAccordion";
+export { default as FeatureSplit } from "./FeatureSplit";
+export type { FeatureSplitProps } from "./FeatureSplit";
+export { default as PageHero } from "./PageHero";
+export { default as PricingPlans } from "./PricingPlans";
+export { default as SecurityIllustration } from "./SecurityIllustration";
+export { default as WaitlistForm } from "./WaitlistForm";

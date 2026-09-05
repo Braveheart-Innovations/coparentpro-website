@@ -1,28 +1,36 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
-import { Container, Card, Button } from "@/components/ui";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Container } from "@/components/ui";
+import { ContactForm, FAQAccordion, PageHero } from "@/components/sections";
+import type { FAQItem } from "@/components/sections";
 import { SUPPORT_EMAIL } from "@/lib/metadata";
 
-const CONTACT_FORM_URL =
-  "https://us-central1-coparentpro-52435.cloudfunctions.net/contactForm";
+export const metadata: Metadata = {
+  title: "Support",
+  description:
+    "Get help with CoParentPro. Find answers to frequently asked questions or contact our support team.",
+};
 
-const FAQ = [
+const FAQ: FAQItem[] = [
   {
     q: "How do I connect with my co-parent?",
-    a: "Go to the My Network tab, tap \u2018Add Connection\u2019, and search for your co-parent using their name or email. Send them a connection request from within the app. Once they accept, you\u2019ll be able to message, share calendars, and more.",
+    a: "Open the People tab, tap Add connection, and search for your co-parent by email to send a connection request. Once they accept, you can message, share the calendar, and more. You’ll need to verify your email address before you can search for or connect with anyone — it’s how we stop someone else from posing as you.",
+  },
+  {
+    q: "How does the tone guidance work?",
+    a: "In two layers. As you type, a rule-based check on your phone rates your draft green (constructive), yellow (caution), or red (potentially harmful). It works offline and catches explicit insults, threats, and pressure tactics on its own. When you tap Send or Review, our cloud AI reads the draft in context, explains each flagged phrase, and offers two rewrites — Softer and More direct. Drafts and rewrites are never stored and never shown to your co-parent. The How it works page on this site explains each step, and why it’s built that way.",
+  },
+  {
+    q: "Can I keep the analysis on my phone?",
+    a: "Yes. Turn on Private Mode in Settings. Subtle tone analysis then stays on your phone and nothing is sent to the cloud, so you won’t get cloud explanations or rewrites while it’s on — strong explicit warnings still appear. Conversations with family members and other non-co-parent contacts always stay on your phone, whatever the setting.",
   },
   {
     q: "Is my data secure?",
-    a: "Yes. CoParentPro uses TLS/SSL encryption for all data in transit, Firebase Authentication for secure access, and Firestore security rules to ensure only authorized users can access data. We take your family's privacy very seriously.",
+    a: "Yes. CoParentPro runs on Google Cloud (Firebase) with encryption in transit and at rest, secure sign-in with optional two-factor authentication, and server-enforced access rules so only your family can read your family’s records. Messages can’t be edited or deleted after they’re sent, by either parent.",
   },
   {
     q: "Can I export my messages for court?",
-    a: "Yes. Go to any conversation, tap the export button, and generate a court-ready report. Reports include SHA-256 integrity verification to help verify the messages haven't been tampered with.",
-  },
-  {
-    q: "How does the communication analysis work?",
-    a: "Our AI analyzes your message tone in real-time using on-device natural language processing. Messages are classified as constructive (green), cautionary (yellow), or potentially harmful (red). The analysis runs on your device — your message content is not sent to external servers for analysis.",
+    a: "Yes, with Premium. Open a conversation and use the export option to generate a court-ready PDF, or a message export as PDF or CSV. Court reports include a SHA-256 hash and a verification code so anyone can confirm the file hasn’t been altered since it was generated. Whether a court admits the report, and what weight it gives it, is the court’s decision — talk to your attorney about using it.",
   },
   {
     q: "How do I cancel my subscription?",
@@ -30,241 +38,65 @@ const FAQ = [
   },
   {
     q: "What happens to my data if I delete my account?",
-    a: "When you request account deletion, there's a 30-day grace period during which you can cancel. After that, your personal data is permanently removed. Message content is anonymized but preserved for court compliance purposes.",
+    a: "When you request account deletion, there’s a 30-day grace period during which you can cancel. After that, your personal data is permanently removed. Message content is anonymized — your identity is removed — but kept so your co-parent’s records stay complete.",
+  },
+  {
+    q: "Can I get a copy of my data?",
+    a: `Yes. Go to Settings > Data Export and tap Request My Data. It opens an email to ${SUPPORT_EMAIL} from your account, and we’ll respond within the time required by law. With Premium you can also export your message history and court reports directly in the app.`,
   },
   {
     q: "Do both parents need the app?",
-    a: "For the best experience, yes. Both parents need their own CoParentPro account to use shared messaging, calendars, and expense tracking. Each parent manages their own subscription.",
+    a: "For the best experience, yes. Both parents need their own CoParentPro account to use shared messaging, calendars, and expense tracking. Messaging is free for both — and one Premium subscription lets both parents edit shared records.",
   },
   {
-    q: "Is CoParentPro available in my country?",
-    a: "CoParentPro is currently available in the United States, Canada, United Kingdom, and Australia via the App Store and Google Play Store. We're working on expanding to additional regions.",
+    q: "When will CoParentPro be available?",
+    a: "The app is in final review for the App Store and Google Play. Join the waitlist on our homepage and we’ll email you the day it launches.",
   },
-];
-
-const SUBJECT_OPTIONS = [
-  "General Question",
-  "Technical Support",
-  "Billing & Subscription",
-  "Feature Request",
-  "Bug Report",
-  "Account Issue",
-  "Other",
 ];
 
 export default function SupportPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: SUBJECT_OPTIONS[0],
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch(CONTACT_FORM_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
-
-      setSubmitted(true);
-    } catch {
-      setError(
-        `Failed to send message. Please try again or email us directly at ${SUPPORT_EMAIL}.`
-      );
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-b from-primary-light to-white py-16 sm:py-20">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 tracking-tight">
-              How can we help?
-            </h1>
-            <p className="mt-4 text-lg sm:text-xl text-neutral-700 leading-relaxed">
-              Find answers to common questions or reach out to our support team.
-            </p>
-          </div>
+      <PageHero
+        eyebrow="Support"
+        title="How can we help?"
+        description="Find answers to common questions or reach out to our support team."
+        width="sm"
+        bottom="tight"
+      />
+
+      <section id="faq" className="scroll-mt-20 pt-6 pb-16 sm:pt-10 sm:pb-20">
+        <Container size="sm">
+          <h2 className="mb-9 text-center font-serif text-[30px] font-medium sm:text-[34px]">
+            Frequently asked questions
+          </h2>
+          <FAQAccordion items={FAQ} />
+          <p className="mt-[26px] text-center text-sm leading-[1.65] text-neutral-500">
+            Want to know why the tone guidance works the way it does?{" "}
+            <Link href="/how-it-works" className="font-semibold text-primary hover:text-primary-dark">
+              Read How it works
+            </Link>
+            .
+          </p>
         </Container>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 sm:py-20 bg-white" id="faq">
-        <Container>
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-neutral-900 tracking-tight text-center mb-12">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              {FAQ.map((item) => (
-                <Card key={item.q} interactive={false} className="border border-neutral-100">
-                  <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                    {item.q}
-                  </h3>
-                  <p className="text-neutral-700 leading-relaxed text-sm">
-                    {item.a}
-                  </p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Contact form */}
-      <section className="py-16 sm:py-20 bg-neutral-100" id="contact">
-        <Container>
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-neutral-900 tracking-tight text-center mb-4">
-              Contact Us
-            </h2>
-            <p className="text-center text-neutral-700 mb-10">
-              Can&apos;t find what you&apos;re looking for? Send us a message
-              and we&apos;ll get back to you as soon as possible.
-            </p>
-
-            {submitted ? (
-              <Card interactive={false} className="text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-success/10 text-success flex items-center justify-center mx-auto mb-4">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-8 h-8">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-neutral-900 mb-2">
-                  Message sent!
-                </h3>
-                <p className="text-neutral-700">
-                  Thank you for reaching out. We&apos;ll get back to you within
-                  1-2 business days.
-                </p>
-              </Card>
-            ) : (
-              <Card interactive={false} className="border border-neutral-100">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-neutral-900 mb-1.5"
-                      >
-                        Name
-                      </label>
-                      <input
-                        id="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        className="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-neutral-900 placeholder:text-neutral-500 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-neutral-900 mb-1.5"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        className="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-neutral-900 placeholder:text-neutral-500 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="your@email.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium text-neutral-900 mb-1.5"
-                    >
-                      Subject
-                    </label>
-                    <select
-                      id="subject"
-                      value={formData.subject}
-                      onChange={(e) =>
-                        setFormData({ ...formData, subject: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-neutral-900 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    >
-                      {SUBJECT_OPTIONS.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-neutral-900 mb-1.5"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      required
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-neutral-900 placeholder:text-neutral-500 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                      placeholder="How can we help?"
-                    />
-                  </div>
-
-                  {error && (
-                    <div className="rounded-lg bg-error/10 border border-error/20 p-3 text-sm text-error">
-                      {error}
-                    </div>
-                  )}
-
-                  <Button type="submit" disabled={loading} className="w-full justify-center">
-                    {loading ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              </Card>
-            )}
-
-            <p className="text-center text-sm text-neutral-500 mt-6">
-              You can also email us directly at{" "}
-              <a
-                href={`mailto:${SUPPORT_EMAIL}`}
-                className="text-primary hover:text-primary-dark underline"
-              >
-                {SUPPORT_EMAIL}
-              </a>
-            </p>
-          </div>
+      <section id="contact" className="scroll-mt-20 bg-mist py-20 sm:py-[90px]">
+        <Container size="xs">
+          <h2 className="mb-3 text-center font-serif text-[30px] font-medium sm:text-[34px]">
+            Contact us
+          </h2>
+          <p className="mb-9 text-center text-[15px] leading-[1.65] text-neutral-700">
+            Can’t find what you’re looking for? Send us a message and we’ll get
+            back to you within 1–2 business days.
+          </p>
+          <ContactForm />
+          <p className="mt-[22px] text-center text-[13.5px] text-neutral-500">
+            You can also email us directly at{" "}
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary underline hover:text-primary-dark">
+              {SUPPORT_EMAIL}
+            </a>
+          </p>
         </Container>
       </section>
     </>

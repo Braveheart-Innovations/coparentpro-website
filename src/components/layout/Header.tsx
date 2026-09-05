@@ -2,41 +2,35 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { SITE_NAME } from "@/lib/metadata";
-import Button from "@/components/ui/Button";
+import { usePathname } from "next/navigation";
 import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
+import { NAV_LINKS, WAITLIST_HREF } from "@/lib/metadata";
+import Logo from "./Logo";
 
-const NAV_LINKS = [
-  { label: "Features", href: "/features" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Support", href: "/support" },
-] as const;
-
-function HamburgerIcon({ open }: { open: boolean }) {
+function MenuIcon({ open }: { open: boolean }) {
   return (
     <svg
-      width="24"
-      height="24"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
       {open ? (
-        /* X / close icon */
         <>
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </>
       ) : (
-        /* Three-line hamburger icon */
         <>
-          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="7" x2="21" y2="7" />
           <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
+          <line x1="3" y1="17" x2="21" y2="17" />
         </>
       )}
     </svg>
@@ -44,104 +38,83 @@ function HamburgerIcon({ open }: { open: boolean }) {
 }
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
 
-  function closeMobileMenu() {
-    setMobileMenuOpen(false);
-  }
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-neutral-300">
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur-md">
       <Container>
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            onClick={closeMobileMenu}
-            aria-label={`${SITE_NAME} — go to home`}
-            className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element -- static export uses unoptimized images */}
-            <img
-              src="/images/logo-words.png"
-              alt={`${SITE_NAME} logo`}
-              width={140}
-              height={40}
-              className="h-8 w-auto object-contain"
-            />
-          </Link>
+        <div className="flex h-[68px] items-center justify-between">
+          <Logo onClick={close} />
 
-          {/* Desktop nav + CTA */}
-          <div className="hidden md:flex items-center gap-8">
-            <nav aria-label="Primary navigation">
-              <ul className="flex items-center gap-8 list-none m-0 p-0">
-                {NAV_LINKS.map(({ label, href }) => (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      className="text-neutral-700 hover:text-primary transition-colors duration-200 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <Button href="/pricing#download" size="sm">
-              Download
+          {/* Desktop navigation */}
+          <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
+            {NAV_LINKS.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                aria-current={isActive(href) ? "page" : undefined}
+                className={`text-sm transition-colors ${
+                  isActive(href)
+                    ? "font-semibold text-primary"
+                    : "font-medium text-neutral-700 hover:text-primary"
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+            <Button href={WAITLIST_HREF} size="sm">
+              Join the waitlist
             </Button>
-          </div>
+          </nav>
 
           {/* Mobile menu toggle */}
           <button
             type="button"
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-md text-neutral-700 hover:text-primary hover:bg-neutral-100 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
-            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={mobileMenuOpen}
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             aria-controls="mobile-menu"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-700 transition-colors hover:bg-cloud hover:text-primary md:hidden"
           >
-            <HamburgerIcon open={mobileMenuOpen} />
+            <MenuIcon open={open} />
           </button>
         </div>
       </Container>
 
-      {/* Mobile slide-down menu */}
+      {/* Mobile menu */}
       <div
         id="mobile-menu"
-        role="region"
-        aria-label="Mobile navigation"
-        className={[
-          "md:hidden overflow-hidden border-t border-neutral-300 bg-white transition-all duration-200",
-          mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
-        ].join(" ")}
+        className={`overflow-hidden border-t border-line bg-paper transition-[max-height,opacity] duration-200 md:hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 border-t-0 opacity-0"
+        }`}
       >
         <Container>
-          <nav aria-label="Mobile primary navigation">
-            <ul className="flex flex-col list-none m-0 p-0 py-4 gap-1">
-              {NAV_LINKS.map(({ label, href }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    onClick={closeMobileMenu}
-                    className="block px-3 py-2.5 text-neutral-700 hover:text-primary hover:bg-neutral-100 rounded-lg transition-colors duration-200 text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-
-              <li className="pt-3 border-t border-neutral-300 mt-2">
-                <Link
-                  href="/pricing#download"
-                  onClick={closeMobileMenu}
-                  className="block w-full text-center bg-primary text-white hover:bg-primary-dark font-medium rounded-lg px-6 py-3 transition-colors duration-200"
-                >
-                  Download
-                </Link>
-              </li>
-            </ul>
+          <nav aria-label="Mobile" className="flex flex-col gap-1 py-4">
+            {NAV_LINKS.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={close}
+                aria-current={isActive(href) ? "page" : undefined}
+                className={`rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-cloud ${
+                  isActive(href)
+                    ? "font-semibold text-primary"
+                    : "font-medium text-neutral-700"
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
+            <div className="mt-3 border-t border-line pt-4">
+              <Button href={WAITLIST_HREF} onClick={close} className="w-full">
+                Join the waitlist
+              </Button>
+            </div>
           </nav>
         </Container>
       </div>

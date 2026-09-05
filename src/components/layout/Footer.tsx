@@ -1,26 +1,27 @@
 import Link from "next/link";
-import { SUPPORT_EMAIL } from "@/lib/metadata";
-import AppStoreBadges from "@/components/ui/AppStoreBadges";
 import Container from "@/components/ui/Container";
+import { COMPANY_NAME, SUPPORT_EMAIL, WAITLIST_HREF } from "@/lib/metadata";
+import Logo from "./Logo";
 
-type FooterLink = {
-  label: string;
-  href: string;
-  external?: boolean;
-};
+type FooterLink = { label: string; href: string };
+type FooterColumn = { heading: string; links: FooterLink[] };
 
-type FooterColumn = {
-  heading: string;
-  links: FooterLink[];
-};
-
-const FOOTER_COLUMNS: FooterColumn[] = [
+const COLUMNS: FooterColumn[] = [
   {
     heading: "Product",
     links: [
       { label: "Features", href: "/features" },
+      { label: "How it works", href: "/how-it-works" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Download", href: "/pricing#download" },
+      { label: "Join the waitlist", href: WAITLIST_HREF },
+    ],
+  },
+  {
+    heading: "Support",
+    links: [
+      { label: "Help Center", href: "/support" },
+      { label: "FAQ", href: "/support#faq" },
+      { label: "Contact", href: `mailto:${SUPPORT_EMAIL}` },
     ],
   },
   {
@@ -31,62 +32,46 @@ const FOOTER_COLUMNS: FooterColumn[] = [
       { label: "Licenses", href: "/licenses" },
     ],
   },
-  {
-    heading: "Support",
-    links: [
-      { label: "Help Center", href: "/support" },
-      { label: "Contact", href: `mailto:${SUPPORT_EMAIL}`, external: true },
-      { label: "FAQ", href: "/support#faq" },
-    ],
-  },
-  {
-    heading: "Company",
-    links: [
-      { label: "About", href: "#" },
-      { label: "Blog", href: "#" },
-    ],
-  },
 ];
 
-const LINK_CLASSES =
-  "text-neutral-300 hover:text-white transition-colors duration-200 text-sm leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded-sm";
+const LINK_CLASSES = "text-sm text-white/75 transition-colors hover:text-white";
 
 function FooterLinkItem({ link }: { link: FooterLink }) {
-  if (link.external) {
+  if (link.href.startsWith("/")) {
     return (
-      <a
-        href={link.href}
-        className={LINK_CLASSES}
-        rel="noopener noreferrer"
-      >
+      <Link href={link.href} className={LINK_CLASSES}>
         {link.label}
-      </a>
+      </Link>
     );
   }
-
   return (
-    <Link href={link.href} className={LINK_CLASSES}>
+    <a href={link.href} className={LINK_CLASSES}>
       {link.label}
-    </Link>
+    </a>
   );
 }
 
 export default function Footer() {
-  const currentYear = 2026;
-
   return (
-    <footer className="bg-neutral-900 text-white" aria-label="Site footer">
+    <footer className="bg-navy-deep pt-16 pb-10 text-white">
       <Container>
-        {/* Main columns grid */}
-        <div className="py-14 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {FOOTER_COLUMNS.map((column) => (
+        <div className="grid gap-12 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Logo tone="dark" />
+            <p className="mt-4 max-w-[280px] text-[13.5px] leading-relaxed text-white/60">
+              Communicate better, co-parent smarter. Coming soon to iOS and
+              Android.
+            </p>
+          </div>
+
+          {COLUMNS.map((column) => (
             <div key={column.heading}>
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.08em] text-white/50">
                 {column.heading}
-              </h3>
-              <ul className="flex flex-col gap-3 list-none m-0 p-0">
+              </p>
+              <ul className="flex flex-col gap-2.5">
                 {column.links.map((link) => (
-                  <li key={link.href + link.label}>
+                  <li key={link.href}>
                     <FooterLinkItem link={link} />
                   </li>
                 ))}
@@ -95,18 +80,11 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* App store badges */}
-        <div className="py-8 border-t border-white/10">
-          <p className="text-sm text-neutral-500 mb-4">Get the app</p>
-          <AppStoreBadges direction="row" />
-        </div>
-
-        {/* Bottom bar */}
-        <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-          <p className="text-sm text-neutral-500">
-            &copy; {currentYear} Braveheart Innovations. All rights reserved.
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-7">
+          <p className="text-[13px] text-white/45">
+            &copy; 2026 {COMPANY_NAME}. All rights reserved.
           </p>
-          <p className="text-sm text-neutral-500 italic">
+          <p className="text-[13px] italic text-white/45">
             Made with care for families everywhere.
           </p>
         </div>

@@ -1,20 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Header } from "@/components/layout";
-import { Footer } from "@/components/layout";
-import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/metadata";
+import { Newsreader, Public_Sans } from "next/font/google";
+import { AnnouncementBar, Footer, Header } from "@/components/layout";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/metadata";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const publicSans = Public_Sans({
   subsets: ["latin"],
+  variable: "--font-public-sans",
   display: "swap",
 });
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
+const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_TAGLINE}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} - Co-Parenting Communication Made Better`,
+    default: DEFAULT_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -23,7 +32,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} - Co-Parenting Communication Made Better`,
+    title: DEFAULT_TITLE,
     description: SITE_DESCRIPTION,
     images: [
       {
@@ -36,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} - Co-Parenting Communication Made Better`,
+    title: DEFAULT_TITLE,
     description: SITE_DESCRIPTION,
     images: ["/images/og-image.png"],
   },
@@ -52,8 +61,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased min-h-screen flex flex-col">
+    <html lang="en" className={`${publicSans.variable} ${newsreader.variable}`}>
+      <body className="flex min-h-screen flex-col antialiased">
+        <AnnouncementBar />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

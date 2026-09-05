@@ -1,19 +1,21 @@
-import { Container, Button } from "@/components/ui";
+import { Button, Container } from "@/components/ui";
 
 export default function NotFound() {
   return (
-    <section className="py-24 sm:py-32 bg-white">
-      <Container>
-        <div className="text-center max-w-lg mx-auto">
-          <p className="text-6xl font-bold text-primary mb-4">404</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-4">
+    <section className="bg-linear-to-b from-primary-light to-paper py-24 sm:py-32">
+      <Container size="xs">
+        <div className="text-center">
+          <p className="font-serif text-7xl font-medium text-primary">404</p>
+          <h1 className="mt-4 font-serif text-[32px] font-medium leading-[1.15] sm:text-[38px]">
             Page not found
           </h1>
-          <p className="text-neutral-700 mb-8 leading-relaxed">
-            Sorry, we couldn&apos;t find the page you&apos;re looking for. It
-            may have been moved or no longer exists.
+          <p className="mt-4 text-base leading-relaxed text-neutral-700">
+            Sorry, we couldn’t find the page you’re looking for. It may have been
+            moved or no longer exists.
           </p>
-          <Button href="/">Go back home</Button>
+          <Button href="/" className="mt-8">
+            Go back home
+          </Button>
         </div>
       </Container>
     </section>
