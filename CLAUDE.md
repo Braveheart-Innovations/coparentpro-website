@@ -120,9 +120,12 @@ The full token list (including `flag-red`, `amber`, border tints, and shadows) i
 - **Competitor quotes** on `/how-it-works` are dated (September 5, 2026); re-verify before changing them
 
 ### Waitlist (pre-launch)
-- `WaitlistForm` posts to the same `contactForm` Cloud Function as the support form, with subject `Waitlist signup`, so each signup lands in the support inbox. Rate limits on that function apply (3/hour per email, 10/hour per IP).
+- `WaitlistForm` posts `{ email, source }` to the `waitlist` Cloud Function (`WAITLIST_URL` in `src/lib/metadata.ts`; source is `../CoParentPro/functions/src/waitlist.ts`, deployed with `firebase deploy --only functions:waitlist` from the mobile repo).
+- The function validates the email, rate-limits per IP (20/hour, 100/day), and stores one Firestore document per email in the `waitlist` collection (doc ID = SHA-256 of the lower-cased email; fields `email`, `source` path, `createdAt`, `lastSeenAt`, `signupCount`). Repeat signups update the existing entry and still return success. Firestore rules deny all client access; only the function writes.
+- If the `RESEND_AUDIENCE_ID` function param is set (in `functions/.env.coparentpro-52435` in the mobile repo), new signups are also added to that Resend audience so the launch email can be a single Resend broadcast. Leave it empty to skip the sync.
+- Responses: `400` invalid email, `429` rate limited, `200 {success: true}` otherwise. The form maps these to inline messages.
 - A successful signup is remembered in `localStorage` (`cpp_waitlist_joined`) and both forms on the homepage sync via a `cpp:waitlist-joined` window event.
-- **Upgrade path:** a dedicated `waitlist` Cloud Function (or Firestore collection) in the mobile repo; only `CONTACT_FORM_URL`/the payload in `WaitlistForm.tsx` needs to change.
+- To export the list: Firebase console → Firestore → `waitlist`, or query the collection with the Admin SDK.
 - **At launch:** replace waitlist CTAs with store badges, set `APP_STORE_URL`/`PLAY_STORE_URL` in `src/lib/metadata.ts`, remove `AnnouncementBar`, and update the "Coming soon" / "in final review" copy on Home, Pricing, Support FAQ, and the footer.
 
 ### Deployment

@@ -8,12 +8,13 @@ export const COMPANY_NAME = "Braveheart Innovations";
 export const SUPPORT_EMAIL = "support@braveheartinnovations.com";
 
 /**
- * Contact-form Cloud Function, deployed from the mobile app repo
- * (`../CoParentPro/functions/src/contactForm.ts`). The waitlist form posts
- * here too until a dedicated waitlist endpoint exists.
+ * Cloud Functions deployed from the mobile app repo (`../CoParentPro/functions/src/`).
+ * `contactForm.ts` emails support; `waitlist.ts` stores launch signups in Firestore.
  */
 export const CONTACT_FORM_URL =
   "https://us-central1-coparentpro-52435.cloudfunctions.net/contactForm";
+export const WAITLIST_URL =
+  "https://us-central1-coparentpro-52435.cloudfunctions.net/waitlist";
 
 /** Anchor for the hero waitlist form on the homepage. */
 export const WAITLIST_HREF = "/#waitlist";

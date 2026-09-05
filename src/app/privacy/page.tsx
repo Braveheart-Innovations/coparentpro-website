@@ -104,6 +104,24 @@ export default function PrivacyPage() {
             analytics, and error reports to improve our services.
           </p>
 
+          <h3 className="text-lg font-bold text-neutral-900 mt-6 mb-2">
+            1.9 Website Launch Waitlist
+          </h3>
+          <p className="text-neutral-700 leading-relaxed mb-4">
+            If you join the launch waitlist on coparentpro.app, we store the
+            email address you enter and the page of our website you signed up
+            from, so we can email you when the App is available. We use this
+            address only to notify you about the App&apos;s launch. To be
+            removed from the waitlist at any time, email us at{" "}
+            <a
+              href={`mailto:${SUPPORT_EMAIL}`}
+              className="text-primary hover:text-primary-dark underline"
+            >
+              {SUPPORT_EMAIL}
+            </a>
+            .
+          </p>
+
           <h2 className="font-serif text-[26px] font-medium leading-[1.2] text-neutral-900 mt-10 mb-4">
             2. How We Use Your Information
           </h2>

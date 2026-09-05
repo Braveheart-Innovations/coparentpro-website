@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState, type FormEvent } from "react";
-import { CONTACT_FORM_URL, SUPPORT_EMAIL } from "@/lib/metadata";
+import { SUPPORT_EMAIL, WAITLIST_URL } from "@/lib/metadata";
 
 const JOINED_STORAGE_KEY = "cpp_waitlist_joined";
 const JOINED_EVENT = "cpp:waitlist-joined";
@@ -18,6 +18,12 @@ type Props = {
   note?: string;
   className?: string;
 };
+
+function errorMessage(status: number | null): string {
+  if (status === 400) return "Please enter a valid email address.";
+  if (status === 429) return "Too many attempts from this address. Please try again in an hour.";
+  return `Something went wrong. Please try again, or email ${SUPPORT_EMAIL}.`;
+}
 
 export default function WaitlistForm({
   variant = "light",
@@ -47,27 +53,22 @@ export default function WaitlistForm({
     event.preventDefault();
     const value = email.trim();
     if (!EMAIL_RE.test(value)) {
-      setError("Please enter a valid email address.");
+      setError(errorMessage(400));
       return;
     }
 
     setStatus("sending");
     setError(null);
 
+    let responseStatus: number | null = null;
     try {
-      const response = await fetch(CONTACT_FORM_URL, {
+      const response = await fetch(WAITLIST_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: "Waitlist signup",
-          email: value,
-          subject: "Waitlist signup",
-          message: `Please add ${value} to the CoParentPro launch waitlist.\n\nSubmitted from ${window.location.href}`,
-        }),
+        body: JSON.stringify({ email: value, source: window.location.pathname }),
       });
-
-      if (response.status === 429) throw new Error("rate-limited");
-      if (!response.ok) throw new Error("failed");
+      responseStatus = response.status;
+      if (!response.ok) throw new Error(`waitlist ${response.status}`);
 
       try {
         localStorage.setItem(JOINED_STORAGE_KEY, "1");
@@ -76,13 +77,9 @@ export default function WaitlistForm({
       }
       window.dispatchEvent(new Event(JOINED_EVENT));
       setStatus("done");
-    } catch (err) {
+    } catch {
       setStatus("idle");
-      setError(
-        err instanceof Error && err.message === "rate-limited"
-          ? "Too many attempts from this address. Please try again in an hour."
-          : `Something went wrong. Please try again, or email ${SUPPORT_EMAIL}.`
-      );
+      setError(errorMessage(responseStatus));
     }
   }
 
