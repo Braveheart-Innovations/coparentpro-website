@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: SITE_NAME,
+        alt: "CoParentPro — Co-parenting is hard. The conversation doesn’t have to be.",
       },
     ],
   },
