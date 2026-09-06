@@ -3,7 +3,7 @@ export const SITE_NAME = "CoParentPro";
 export const SITE_TAGLINE =
   "Co-parenting is hard. The conversation doesn’t have to be.";
 export const SITE_DESCRIPTION =
-  "CoParentPro helps co-parents keep every exchange calm, documented, and centered on their kids — with tone guidance before you hit send, a shared custody calendar, and court-ready records. Coming soon to iOS and Android.";
+  "CoParentPro helps co-parents keep every exchange calm, documented, and centered on their kids — with tone guidance before you hit send, a shared custody calendar, and court-ready records. Now on Google Play; coming soon to iPhone.";
 export const COMPANY_NAME = "Braveheart Innovations";
 export const SUPPORT_EMAIL = "support@braveheartinnovations.com";
 
@@ -20,7 +20,8 @@ export const WAITLIST_URL =
 export const WAITLIST_HREF = "/#waitlist";
 
 export const APP_STORE_URL = "#"; // TODO: Replace with actual App Store URL once published
-export const PLAY_STORE_URL = "#"; // TODO: Replace with actual Play Store URL once published
+export const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.braveheartinnovations.coparentpro";
 
 /** Must match the RevenueCat configuration in the mobile app. */
 export const PRICING = {

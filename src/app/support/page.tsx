@@ -54,7 +54,7 @@ const FAQ: FAQItem[] = [
   },
   {
     q: "When will CoParentPro be available?",
-    a: "The app is in final review for the App Store and Google Play. Join the waitlist on our homepage and we’ll email you the day it launches.",
+    a: "CoParentPro is available now on Google Play. The iPhone version is in App Store review; join the waitlist on our homepage and we’ll email you the day it’s live.",
   },
 ];
 

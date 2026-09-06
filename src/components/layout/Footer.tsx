@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import { COMPANY_NAME, SUPPORT_EMAIL, WAITLIST_HREF } from "@/lib/metadata";
+import { COMPANY_NAME, PLAY_STORE_URL, SUPPORT_EMAIL, WAITLIST_HREF } from "@/lib/metadata";
 import Logo from "./Logo";
 
 type FooterLink = { label: string; href: string };
@@ -13,7 +13,8 @@ const COLUMNS: FooterColumn[] = [
       { label: "Features", href: "/features" },
       { label: "How it works", href: "/how-it-works" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Join the waitlist", href: WAITLIST_HREF },
+      { label: "Get it on Google Play", href: PLAY_STORE_URL },
+      { label: "iPhone waitlist", href: WAITLIST_HREF },
     ],
   },
   {
@@ -60,8 +61,8 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo tone="dark" />
             <p className="mt-4 max-w-[280px] text-[13.5px] leading-relaxed text-white/60">
-              Communicate better, co-parent smarter. Coming soon to iOS and
-              Android.
+              Communicate better, co-parent smarter. Available now on Google
+              Play; coming soon to iPhone.
             </p>
           </div>
 

@@ -9,14 +9,14 @@ export default function AnnouncementBar() {
 
   return (
     <div className="bg-navy px-5 py-2.5 text-center text-[13px] font-medium tracking-[0.02em] text-primary-light">
-      Launching soon on iOS &amp; Android —{" "}
+      Now on Google Play. iPhone version in App Store review —{" "}
       <a
         href="#waitlist"
         className="font-semibold text-teal-glow transition-colors hover:text-white"
       >
         join the waitlist
       </a>{" "}
-      to be first in line
+      to hear first
     </div>
   );
 }
