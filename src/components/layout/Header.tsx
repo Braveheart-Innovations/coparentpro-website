@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { NAV_LINKS, WAITLIST_HREF } from "@/lib/metadata";
+import { NAV_LINKS, PLAY_STORE_URL } from "@/lib/metadata";
 import Logo from "./Logo";
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -67,8 +67,8 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <Button href={WAITLIST_HREF} size="sm">
-              Join the waitlist
+            <Button href={PLAY_STORE_URL} size="sm" target="_blank" rel="noopener noreferrer">
+              Get it on Google Play
             </Button>
           </nav>
 
@@ -111,8 +111,14 @@ export default function Header() {
               </Link>
             ))}
             <div className="mt-3 border-t border-line pt-4">
-              <Button href={WAITLIST_HREF} onClick={close} className="w-full">
-                Join the waitlist
+              <Button
+                href={PLAY_STORE_URL}
+                onClick={close}
+                className="w-full"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get it on Google Play
               </Button>
             </div>
           </nav>

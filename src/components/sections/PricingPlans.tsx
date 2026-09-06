@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import CheckList from "@/components/ui/CheckList";
-import { PRICING, WAITLIST_HREF } from "@/lib/metadata";
+import { PLAY_STORE_URL, PRICING } from "@/lib/metadata";
 
 type Plan = "monthly" | "annual";
 
@@ -60,8 +60,14 @@ export default function PricingPlans({ freeFeatures, premiumFeatures }: Props) {
             <span className="text-sm text-neutral-500"> per parent / forever</span>
           </p>
           <CheckList items={freeFeatures} className="mt-7 flex-1 gap-3" itemClassName="text-sm" />
-          <Button href={WAITLIST_HREF} variant="outline" className="mt-[30px] w-full">
-            Join the waitlist
+          <Button
+            href={PLAY_STORE_URL}
+            variant="outline"
+            className="mt-[30px] w-full"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get it on Google Play
           </Button>
         </div>
 
@@ -89,8 +95,13 @@ export default function PricingPlans({ freeFeatures, premiumFeatures }: Props) {
               : ""}
           </p>
           <CheckList items={premiumFeatures} className="mt-[22px] flex-1 gap-3" itemClassName="text-sm" />
-          <Button href={WAITLIST_HREF} className="mt-[30px] w-full">
-            Join the waitlist
+          <Button
+            href={PLAY_STORE_URL}
+            className="mt-[30px] w-full"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get it on Google Play
           </Button>
         </div>
       </div>
