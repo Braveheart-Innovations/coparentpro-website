@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui";
 import { DarkCTA, PageHero, PricingPlans } from "@/components/sections";
-import { PLAY_STORE_URL, PRICING, WAITLIST_HREF } from "@/lib/metadata";
+import { PRICING } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -123,11 +123,8 @@ export default function PricingPage() {
 
       <DarkCTA
         id="download"
-        title="Available now on Google Play"
-        body="Free to start. The iPhone version is in App Store review; join the waitlist and we’ll email you the day it lands."
-        primaryLabel="Get it on Google Play"
-        primaryHref={PLAY_STORE_URL}
-        secondary={{ href: WAITLIST_HREF, label: "Join the iPhone waitlist" }}
+        title="Available now on iPhone and Android"
+        body="Free to start. Safe messaging costs nothing for either parent, and Premium comes with a free trial."
       />
     </>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
-import { AnnouncementBar, Footer, Header } from "@/components/layout";
+import { Footer, Header } from "@/components/layout";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/metadata";
 import "./globals.css";
 
@@ -63,7 +63,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${publicSans.variable} ${newsreader.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
-        <AnnouncementBar />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

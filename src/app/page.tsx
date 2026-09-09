@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Button, CheckList, Container, Eyebrow, PhoneFrame } from "@/components/ui";
-import { FeatureSplit, WaitlistForm } from "@/components/sections";
-import { COMPANY_NAME, PLAY_STORE_URL, PRICING } from "@/lib/metadata";
+import { Button, CheckList, Container, Eyebrow, PhoneFrame, StoreBadges } from "@/components/ui";
+import { FeatureSplit } from "@/components/sections";
+import { COMPANY_NAME, PRICING } from "@/lib/metadata";
 
 const TRUST = [
   {
@@ -78,7 +78,7 @@ export default function HomePage() {
             <div className="max-w-[560px] lg:pb-[88px]">
               <div className="mb-7 inline-flex items-center gap-2 rounded-full bg-secondary-light px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.06em] text-secondary-dark">
                 <span className="h-[7px] w-[7px] rounded-full bg-secondary" aria-hidden="true" />
-                Now on Google Play · Free to start
+                Now on iPhone and Android · Free to start
               </div>
               <h1 className="font-serif text-[36px] font-medium leading-[1.08] tracking-[-0.015em] sm:text-[50px] lg:text-[58px]">
                 Co-parenting is hard.
@@ -93,30 +93,7 @@ export default function HomePage() {
                 shared custody calendar, and court-ready records when you need
                 them.
               </p>
-              <a
-                href={PLAY_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-9 inline-block"
-              >
-                <img
-                  src="/images/google-play-badge.png"
-                  alt="Get it on Google Play"
-                  width={194}
-                  height={75}
-                  className="h-[60px] w-auto sm:h-[68px]"
-                />
-              </a>
-              <div id="waitlist" className="mt-7 scroll-mt-28">
-                <p className="mb-3 text-sm font-semibold text-neutral-700">
-                  On iPhone? The App Store version is in review.
-                </p>
-                <WaitlistForm
-                  buttonLabel="Notify me"
-                  doneMessage="You’re on the list — we’ll email you the day the iPhone app is live."
-                  note="One email when the App Store version is live. No spam."
-                />
-              </div>
+              <StoreBadges size="lg" className="mt-9" />
             </div>
             <div className="flex h-[380px] items-start justify-center overflow-hidden sm:h-[520px] lg:h-[640px] lg:items-end lg:overflow-visible">
               <PhoneFrame
@@ -400,30 +377,16 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-navy px-5 py-20 sm:px-8 sm:py-[100px]">
+      <section id="download" className="scroll-mt-20 bg-navy px-5 py-20 sm:px-8 sm:py-[100px]">
         <div className="mx-auto max-w-[640px] text-center">
           <h2 className="font-serif text-[34px] font-medium leading-[1.15] text-balance text-white sm:text-[42px]">
             Get CoParentPro today
           </h2>
           <p className="mt-4 text-base leading-[1.65] text-white/72">
-            Available now on Google Play. The iPhone version is in App Store
-            review; join the waitlist and we’ll email you the moment it’s live.
+            Available now on the App Store and Google Play. Free to start, for
+            both parents.
           </p>
-          <Button
-            href={PLAY_STORE_URL}
-            variant="teal"
-            className="mt-8"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Get it on Google Play
-          </Button>
-          <WaitlistForm
-            variant="dark"
-            buttonLabel="Notify me for iPhone"
-            doneMessage="You’re on the list — we’ll email you the day the iPhone app is live."
-            className="mt-6"
-          />
+          <StoreBadges size="md" className="mt-8 justify-center" />
         </div>
       </section>
     </>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { NAV_LINKS, PLAY_STORE_URL } from "@/lib/metadata";
+import { DOWNLOAD_HREF, NAV_LINKS } from "@/lib/metadata";
 import Logo from "./Logo";
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -67,8 +67,8 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <Button href={PLAY_STORE_URL} size="sm" target="_blank" rel="noopener noreferrer">
-              Get it on Google Play
+            <Button href={DOWNLOAD_HREF} size="sm">
+              Get the app
             </Button>
           </nav>
 
@@ -111,14 +111,8 @@ export default function Header() {
               </Link>
             ))}
             <div className="mt-3 border-t border-line pt-4">
-              <Button
-                href={PLAY_STORE_URL}
-                onClick={close}
-                className="w-full"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Get it on Google Play
+              <Button href={DOWNLOAD_HREF} onClick={close} className="w-full">
+                Get the app
               </Button>
             </div>
           </nav>

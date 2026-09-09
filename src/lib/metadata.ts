@@ -16,13 +16,11 @@ export const SUPPORT_EMAIL = "support@braveheartinnovations.com";
  */
 export const CONTACT_FORM_URL =
   "https://us-central1-coparentpro-52435.cloudfunctions.net/contactForm";
-export const WAITLIST_URL =
-  "https://us-central1-coparentpro-52435.cloudfunctions.net/waitlist";
 
-/** Anchor for the hero waitlist form on the homepage. */
-export const WAITLIST_HREF = "/#waitlist";
+/** Anchor for the download section on the homepage. */
+export const DOWNLOAD_HREF = "/#download";
 
-export const APP_STORE_URL = "#"; // TODO: Replace with actual App Store URL once published
+export const APP_STORE_URL = "https://apps.apple.com/us/app/coparentpro/id6759169006";
 export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.braveheartinnovations.coparentpro";
 

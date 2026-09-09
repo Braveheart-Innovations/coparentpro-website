@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/components/ui/Button";
 import CheckList from "@/components/ui/CheckList";
-import { PLAY_STORE_URL, PRICING } from "@/lib/metadata";
+import StoreBadges from "@/components/ui/StoreBadges";
+import { PRICING } from "@/lib/metadata";
 
 type Plan = "monthly" | "annual";
 
@@ -60,15 +60,7 @@ export default function PricingPlans({ freeFeatures, premiumFeatures }: Props) {
             <span className="text-sm text-neutral-500"> per parent / forever</span>
           </p>
           <CheckList items={freeFeatures} className="mt-7 flex-1 gap-3" itemClassName="text-sm" />
-          <Button
-            href={PLAY_STORE_URL}
-            variant="outline"
-            className="mt-[30px] w-full"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Get it on Google Play
-          </Button>
+          <StoreBadges size="sm" className="mt-[30px] justify-center" />
         </div>
 
         {/* Premium */}
@@ -95,14 +87,7 @@ export default function PricingPlans({ freeFeatures, premiumFeatures }: Props) {
               : ""}
           </p>
           <CheckList items={premiumFeatures} className="mt-[22px] flex-1 gap-3" itemClassName="text-sm" />
-          <Button
-            href={PLAY_STORE_URL}
-            className="mt-[30px] w-full"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Get it on Google Play
-          </Button>
+          <StoreBadges size="sm" className="mt-[30px] justify-center" />
         </div>
       </div>
     </>
