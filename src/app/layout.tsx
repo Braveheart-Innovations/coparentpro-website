@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
 import { AnnouncementBar, Footer, Header } from "@/components/layout";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/metadata";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/metadata";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -18,7 +18,7 @@ const newsreader = Newsreader({
   display: "swap",
 });
 
-const DEFAULT_TITLE = `${SITE_NAME} — ${SITE_TAGLINE}`;
+const DEFAULT_TITLE = SITE_TITLE;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

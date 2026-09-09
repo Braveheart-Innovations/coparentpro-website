@@ -2,8 +2,11 @@ export const SITE_URL = "https://coparentpro.app";
 export const SITE_NAME = "CoParentPro";
 export const SITE_TAGLINE =
   "Co-parenting is hard. The conversation doesn’t have to be.";
+/** Short page title for search results and link previews (≤60 chars). */
+export const SITE_TITLE = "CoParentPro — Calmer co-parent communication";
+/** Meta description for search results and link previews (≤155 chars). */
 export const SITE_DESCRIPTION =
-  "CoParentPro helps co-parents keep every exchange calm, documented, and centered on their kids — with tone guidance before you hit send, a shared custody calendar, and court-ready records. Now on Google Play; coming soon to iPhone.";
+  "Tone guidance before you hit send, a shared custody calendar, and court-ready records that keep every exchange calm and centered on your kids.";
 export const COMPANY_NAME = "Braveheart Innovations";
 export const SUPPORT_EMAIL = "support@braveheartinnovations.com";
 
