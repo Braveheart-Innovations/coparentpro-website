@@ -7,4 +7,3 @@ export type { FeatureSplitProps } from "./FeatureSplit";
 export { default as PageHero } from "./PageHero";
 export { default as PricingPlans } from "./PricingPlans";
 export { default as SecurityIllustration } from "./SecurityIllustration";
-export { default as WaitlistForm } from "./WaitlistForm";

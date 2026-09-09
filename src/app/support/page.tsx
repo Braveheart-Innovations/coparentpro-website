@@ -53,8 +53,8 @@ const FAQ: FAQItem[] = [
     a: "For the best experience, yes. Both parents need their own CoParentPro account to use shared messaging, calendars, and expense tracking. Messaging is free for both — and one Premium subscription lets both parents edit shared records.",
   },
   {
-    q: "When will CoParentPro be available?",
-    a: "CoParentPro is available now on Google Play. The iPhone version is in App Store review; join the waitlist on our homepage and we’ll email you the day it’s live.",
+    q: "Where can I get CoParentPro?",
+    a: "CoParentPro is available now on the App Store for iPhone and on Google Play for Android. Download links are on our homepage.",
   },
 ];
 

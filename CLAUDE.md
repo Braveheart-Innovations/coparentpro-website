@@ -4,13 +4,15 @@
 
 This is the **marketing website** for [CoParentPro](https://github.com/Braveheart-Innovations/CoParentPro), a React Native mobile app for co-parent communication. The website is deployed at [coparentpro.app](https://coparentpro.app) (and [coparentpro-52435.web.app](https://coparentpro-52435.web.app)).
 
-The current design was iterated in Claude Design (project `bff99fe8-6747-4d18-a774-3defc3b838ce`: `Home.dc.html`, `Features.dc.html`, `HowItWorks.dc.html`, `Pricing.dc.html`, `Support.dc.html`) and ported to Next.js in September 2026, ahead of the app's launch. The site is currently in **pre-launch / waitlist mode**.
+The current design was iterated in Claude Design (project `bff99fe8-6747-4d18-a774-3defc3b838ce`: `Home.dc.html`, `Features.dc.html`, `HowItWorks.dc.html`, `Pricing.dc.html`, `Support.dc.html`) and ported to Next.js in September 2026, ahead of the app's launch. The app is **live on both stores** (Google Play September 6, 2026; App Store September 9, 2026) and the site is in launched mode: store badges everywhere, no waitlist.
 
 ### Relationship to the Mobile App
 
 - **Mobile app repo:** `Braveheart-Innovations/CoParentPro` (sibling directory at `../CoParentPro`)
 - **Shared Firebase project:** `coparentpro-52435`
-- **Logo:** `public/images/logo.png` / `logo-words.png` are copies of the mobile app's `assets/images/CoParentProLogo-*.png`. `logo-mark.webp` (square center crop), `logo-wide.webp`, and `og-image.png` are derived from them with ImageMagick.
+- **Logo:** `public/images/logo.png` / `logo-words.png` are copies of the mobile app's `assets/images/CoParentProLogo-*.png`. `logo-mark.webp` (square center crop) and `logo-wide.webp` are derived from them with ImageMagick. `og-image.png` (1200×630) is a center crop of the Play Store feature graphic (tagline + bridge + wordmark).
+- **Favicons:** `src/app/favicon.ico` (16/32/48), `public/apple-touch-icon.png` (180), `public/icon-192.png`, `public/icon-512.png`, and `public/site.webmanifest` are generated from the mobile app's `assets/images/icon.png` with ImageMagick (`magick icon.png -define icon:auto-resize=48,32,16 favicon.ico`). Regenerate all of them together if the app icon changes.
+- **Store badges:** `app-store-badge.svg` is Apple's official badge from `tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us`; `google-play-badge.png` is Google's. Both render through `components/ui/StoreBadges` (Google's badge has built-in padding, so it is drawn taller to match).
 - **Screenshots:** `public/images/shots/*.webp` are the App Store screenshots from `../CoParentPro/screenshots/store/ios-iphone-6.9/`, resized to 720px wide with `cwebp -q 84 -resize 720 0`. Regenerate from there when the app UI changes.
 - **Legal content:** Privacy policy and terms of service are ported from `../CoParentPro/src/assets/legal/` — keep them in sync when either changes
 - **Brand colors:** Defined in `src/app/globals.css`, sourced from mobile app's `src/theme/colors.ts`
@@ -59,10 +61,10 @@ npm run build && firebase deploy --only hosting
 ```
 src/
 ├── app/
-│   ├── layout.tsx            # Root layout (fonts, metadata, AnnouncementBar/Header/Footer)
+│   ├── layout.tsx            # Root layout (fonts, metadata, Header/Footer)
 │   ├── globals.css           # Tailwind @theme tokens (colors, fonts, shadows) + base styles
-│   ├── page.tsx              # Homepage (hero + waitlist, trust strip, feature splits,
-│   │                         #   getting started, compare table, pricing preview, about, CTA)
+│   ├── page.tsx              # Homepage (hero + store badges, trust strip, feature splits,
+│   │                         #   getting started, compare table, pricing preview, about, #download CTA)
 │   ├── features/page.tsx     # Feature deep-dive + "Where your words go" explainer
 │   ├── how-it-works/page.tsx # Long-form page on the tone guidance (data in lib/content)
 │   ├── pricing/page.tsx      # Plans (monthly/annual toggle), FAQ, CTA
@@ -70,15 +72,15 @@ src/
 │   ├── privacy/, terms/, licenses/   # Legal pages (synced with mobile app)
 │   ├── not-found.tsx, sitemap.ts, robots.ts
 ├── components/
-│   ├── layout/               # AnnouncementBar (home only), Header (sticky, mobile menu), Footer, Logo
-│   ├── ui/                   # Button, Container, Eyebrow, PhoneFrame, CheckList
-│   └── sections/             # WaitlistForm, FeatureSplit, PageHero, DarkCTA, PricingPlans,
+│   ├── layout/               # Header (sticky, mobile menu), Footer, Logo
+│   ├── ui/                   # Button, Container, Eyebrow, PhoneFrame, CheckList, StoreBadges
+│   └── sections/             # FeatureSplit, PageHero, DarkCTA, PricingPlans,
 │                             #   FAQAccordion, ContactForm, SecurityIllustration
 ├── lib/
 │   ├── metadata.ts           # Site constants (URLs, pricing, nav links, contact endpoint)
 │   └── content/how-it-works.ts   # Copy + data tables for /how-it-works
 public/images/
-├── logo*.{png,webp}, og-image.png
+├── logo*.{png,webp}, og-image.png, app-store-badge.svg, google-play-badge.png
 └── shots/*.webp              # App screenshots (see "Relationship to the Mobile App")
 ```
 
@@ -110,7 +112,7 @@ The full token list (including `flag-red`, `amber`, border tints, and shadows) i
 - `sitemap.ts` and `robots.ts` require `export const dynamic = "force-static"`
 - Use `<img>` tags instead of Next.js `<Image>` (the `@next/next/no-img-element` rule is disabled in `eslint.config.mjs`)
 - Client components (`"use client"`) cannot export `metadata` — keep pages as server components and isolate interactivity in `components/sections/*` (see `support/page.tsx`)
-- `usePathname` is used in `AnnouncementBar` and `Header` for the home-only banner and active nav state
+- `usePathname` is used in `Header` for the active nav state
 
 ### Content Accuracy
 - **Do not make unverifiable claims** (e.g., "join thousands of users" when we don't have thousands yet)
@@ -119,14 +121,9 @@ The full token list (including `flag-red`, `amber`, border tints, and shadows) i
 - **Legal content must stay accurate** and in sync with the mobile app
 - **Competitor quotes** on `/how-it-works` are dated (September 5, 2026); re-verify before changing them
 
-### Waitlist (pre-launch)
-- `WaitlistForm` posts `{ email, source }` to the `waitlist` Cloud Function (`WAITLIST_URL` in `src/lib/metadata.ts`; source is `../CoParentPro/functions/src/waitlist.ts`, deployed with `firebase deploy --only functions:waitlist` from the mobile repo).
-- The function validates the email, rate-limits per IP (20/hour, 100/day), and stores one Firestore document per email in the `waitlist` collection (doc ID = SHA-256 of the lower-cased email; fields `email`, `source` path, `createdAt`, `lastSeenAt`, `signupCount`). Repeat signups update the existing entry and still return success. Firestore rules deny all client access; only the function writes.
-- If the `RESEND_AUDIENCE_ID` function param is set (in `functions/.env.coparentpro-52435` in the mobile repo), new signups are also added to that Resend audience so the launch email can be a single Resend broadcast. Leave it empty to skip the sync.
-- Responses: `400` invalid email, `429` rate limited, `200 {success: true}` otherwise. The form maps these to inline messages.
-- A successful signup is remembered in `localStorage` (`cpp_waitlist_joined`) and both forms on the homepage sync via a `cpp:waitlist-joined` window event.
-- To export the list: Firebase console → Firestore → `waitlist`, or query the collection with the Admin SDK.
-- **At launch:** replace waitlist CTAs with store badges, set `APP_STORE_URL`/`PLAY_STORE_URL` in `src/lib/metadata.ts`, remove `AnnouncementBar`, and update the "Coming soon" / "in final review" copy on Home, Pricing, Support FAQ, and the footer.
+### Store links and the retired waitlist
+- `APP_STORE_URL` and `PLAY_STORE_URL` in `src/lib/metadata.ts` are the live listings. `StoreBadges` renders both; `DarkCTA` shows the badges unless given a `primary` button. The Header's "Get the app" button points at `DOWNLOAD_HREF` (`/#download`, the homepage closing CTA).
+- The pre-launch `WaitlistForm` and `AnnouncementBar` were removed on September 9, 2026 when the App Store version went live. The `waitlist` Cloud Function (`../CoParentPro/functions/src/waitlist.ts`) is still deployed but nothing calls it; the signups live in the Firestore `waitlist` collection (doc ID = SHA-256 of the lower-cased email; fields `email`, `source`, `createdAt`, `lastSeenAt`, `signupCount`) and, if `RESEND_AUDIENCE_ID` was set, in that Resend audience. Use them for the launch email, then the function can be deleted from the mobile repo.
 
 ### Deployment
 - Firebase project: `coparentpro-52435`
@@ -153,4 +150,7 @@ npm run typecheck  # Must pass with 0 errors
 
 ## App Store URLs
 
-The `APP_STORE_URL` and `PLAY_STORE_URL` constants in `src/lib/metadata.ts` are placeholder `"#"` values. Update them once the app is published to the stores.
+- App Store: `https://apps.apple.com/us/app/coparentpro/id6759169006`
+- Google Play: `https://play.google.com/store/apps/details?id=com.braveheartinnovations.coparentpro`
+
+Both live in `src/lib/metadata.ts`. Apple's listing can 404 for up to a day after a release; check it before deploying anything that links to it.
